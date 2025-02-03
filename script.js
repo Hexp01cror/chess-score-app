@@ -1,26 +1,7 @@
-let score1 = localStorage.getItem("score1") ? parseInt(localStorage.getItem("score1")) : 0;
-let score2 = localStorage.getItem("score2") ? parseInt(localStorage.getItem("score2")) : 0;
+let scores = { 1: 0, 2: 0 };
 
-document.getElementById("score1").innerText = score1;
-document.getElementById("score2").innerText = score2;
-
-function incrementScore(player) {
-    if (player === 1) {
-        score1++;
-        document.getElementById("score1").innerText = score1;
-        localStorage.setItem("score1", score1);
-    } else {
-        score2++;
-        document.getElementById("score2").innerText = score2;
-        localStorage.setItem("score2", score2);
-    }
-}
-
-function resetScores() {
-    score1 = 0;
-    score2 = 0;
-    document.getElementById("score1").innerText = score1;
-    document.getElementById("score2").innerText = score2;
-    localStorage.setItem("score1", score1);
-    localStorage.setItem("score2", score2);
+function changeScore(player, amount) {
+    scores[player] += amount;
+    if (scores[player] < 0) scores[player] = 0; // 점수가 음수가 되지 않도록 방지
+    document.getElementById(`score${player}`).textContent = scores[player];
 }
